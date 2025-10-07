@@ -9,46 +9,40 @@ void fib() {
     while ( f3 <= 100000000 ) {
         f3 = f1 + f2 ;
         fibnum.push_back( f3 ) ;
-        f2 = f3 ;
         f1 = f2 ;
+        f2 = f3 ;
     }
     reverse( fibnum.begin(), fibnum.end() ) ;
 }
 
-int find( int num ) {
-    int i = fibnum.size()/2 ;
-    if ( fibnum[ i ] > num ) {
-        while ( num < fibnum[ i ] ) {
-            ++i ;
-        }
-        return i ;
-    } else {
-        while ( fibnum[ i ] < num ) {
-            --i ;
-        }
-        return i - 1 ;
-    }
-}
-
 int main() {
+    fib() ;
     int times ;
     int num ;
-    vector<int> zero( fibnum.size(), 0 ) ;
+    int temp ;
     cin >> times ;
+    int start = -1; 
     for ( int i = 0 ; i < times ; ++i ) {
         cin >> num ; 
-        int ooutnum = num ;
-        int start = find( num ) ;
-        while ( num != 0 ) {
-            int temp = find( num ) ;
-            num = num - fibnum[ temp ] ;
-            zero[ temp ] = 1 ;
+        int outnum = num ;
+        int coutnum = num ;
+        int start2 = -1 ;
+        vector<int> zero( fibnum.size(), 0 ) ;
+        for ( size_t j = 0 ; j < fibnum.size() ; ++j ) {
+            if ( coutnum >= fibnum[ j ] ) {
+                if ( start2 == -1 ) {
+                    start2 = j ;
+                }
+                coutnum -= fibnum[ j ] ;
+                zero[ j ] = 1 ;
+            }
         }
         cout << outnum << " = " ;
-        for ( int i = start ; i <= temp ; ++i ) {
-            cout << zero[ i ] ;
+        for ( size_t j = start2 ; j < fibnum.size() ; ++j ) {
+            cout << zero[ j ] ;
         }
         cout << " (fib)\n" ;
     }
+    return 0 ;
 }
 
