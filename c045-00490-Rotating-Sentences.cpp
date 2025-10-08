@@ -25,4 +25,3 @@ void column() {
 int main () {
 	column() ;
 }
-	
