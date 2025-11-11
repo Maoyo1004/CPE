@@ -1,22 +1,15 @@
 #include<iostream>
+#include<string>
 #include<vector>
-#include<algorithm>
 using namespace std ;
 
-void cal( long long a ) {
-    long long b = a ;
-    vector<long long> num ;
-    while ( a > 0 ) {
-        long long temp = a%10 ;
-        num.push_back( temp ) ;
-        a /= 10 ;
-    }
-    reverse( num.begin(), num.end() ) ;
-    long long sum_1 = 0, sum_2 = 0 ;
-    for ( int i = 0 ; i < num.size() ; i += 2 ) {
-        sum_1 += num[ i ] ;
-        if ( i + 1 < num.size() ) {
-            sum_2 += num[ i + 1 ] ;
+void cal( string a ) {
+    string b = a ;
+    int sum_1 = 0, sum_2 = 0 ;
+    for ( int i = 0 ; i < b.size() ; i += 2 ) {
+        sum_1 += b[ i ] ;
+        if ( i + 1 < b.size() ) {
+            sum_2 += b[ i + 1 ] ;
         }
     }
     if ( ( sum_1 - sum_2 )%11 == 0 ) {
@@ -27,8 +20,11 @@ void cal( long long a ) {
 }
 
 int main () {
-    long long a ;
-    while ( cin >> a , a != 0 ) {
+    string a ;
+    while ( cin >> a ) {
+        if ( a == "0" ) {
+            return 0 ; 
+        }
         cal( a ) ;
     }
 }
