@@ -1,33 +1,36 @@
-#include <iostream>
-#include <vector>
-#include <algorithm> 
-using namespace std;
+#include<iostream>
+#include<vector>
+using namespace std ;
 
-void solve() {
-    int count ; 
-    cin >> count ;
-    vector<int> b(count); 
-    for ( int j = 0; j < count ; ++j ) {
-        cin >> b[ j ];
-    }
-    int c = 0;
-    for ( int i = 0 ; i < count - 1 ; ++i ) {
-        for (int j = 0; j < count - 1 - i; ++j) {
-            if (b[j] > b[j + 1]) {
-                swap( b[ j ], b[ j + 1 ] ) ; 
-                c++;
+void change( vector<int> train ) {
+    int rec = 0 ;
+    bool finish = false ;
+    while ( ! finish ) {
+        int deter = 0 ;
+        for ( int i = 0 ; i < train.size() - 1 ; ++i ) {
+            if ( train[ i ] > train[ i + 1 ] ) {
+                swap( train[ i ], train[ i + 1 ] ) ;
+                ++rec ;
+                ++deter ;
             }
+        } 
+        if ( deter == 0 ) {
+            finish = true ;
         }
     }
-
-    cout << "Optimal train swapping takes " << c << " swaps." << "\n";
+    cout << "Optimal train swapping takes " << rec << " swaps.\n" ;
 }
 
 int main() {
-    int t ;
+    int t, l ;
+    vector<int> train ;
     cin >> t ;
-    for ( int i = 0; i < t ; ++i ) {
-        solve() ; 
+    for ( int i = 0 ; i < t ; ++i ) {
+        cin >> l ;
+        vector<int> train( l ) ;
+        for ( int i = 0 ; i < l ; ++i ) {
+            cin >> train[ i ] ;
+        }
+        change( train ) ;
     }
-    return 0;
 }
